@@ -611,7 +611,8 @@ def create_default_admin():
     db.close()
 
 
+init_db()
+create_default_admin()
+
 if __name__ == "__main__":
-    init_db()
-    create_default_admin()
-    app.run(...)
+    app.run(debug=True, host="0.0.0.0", port=5000)
