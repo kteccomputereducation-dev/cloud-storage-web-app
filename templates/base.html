@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cloud File Storage{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="{{ url_for('dashboard') if session.get('user_id') else url_for('login') }}" class="brand">
+                ☁ CloudStore
+            </a>
+        </div>
+        {% if session.get('user_id') %}
+        <form class="nav-search" action="{{ url_for('search') }}" method="get">
+            <input type="text" name="q" placeholder="Search files..." value="{{ request.args.get('q', '') }}">
+        </form>
+        <div class="nav-right">
+            <span class="nav-user">{{ session.get('username') }}</span>
+            {% if session.get('is_admin') %}
+                <a href="{{ url_for('admin_panel') }}">Admin</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        {% endif %}
+    </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

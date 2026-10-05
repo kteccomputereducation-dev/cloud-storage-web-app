@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}My Files - Cloud File Storage{% endblock %}
+{% block content %}
+
+<div class="storage-meter">
+    <div class="meter-info">
+        <strong>{{ used | human_size }}</strong> used of <strong>{{ quota | human_size }}</strong> ({{ percent_used }}%)
+    </div>
+    <div class="meter-bar">
+        <div class="meter-fill" style="width: {{ percent_used }}%;"></div>
+    </div>
+</div>
+
+<div class="breadcrumb">
+    <a href="{{ url_for('dashboard') }}">My Files</a>
+    {% for b in breadcrumb %}
+        / <a href="{{ url_for('dashboard', folder=b.id) }}">{{ b.name }}</a>
+    {% endfor %}
+</div>
+
+<div class="toolbar">
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" class="upload-form">
+        <input type="hidden" name="folder_id" value="{{ current_folder or '' }}">
+        <input type="file" name="files" multiple required>
+        <button type="submit" class="btn-primary">Upload</button>
+    </form>
+
+    <form action="{{ url_for('create_folder') }}" method="post" class="folder-form">
+        <input type="hidden" name="parent_id" value="{{ current_folder or '' }}">
+        <input type="text" name="name" placeholder="New folder name" required>
+        <button type="submit" class="btn-secondary">+ Folder</button>
+    </form>
+</div>
+
+<h2>Folders</h2>
+<div class="grid">
+    {% for folder in folders %}
+    <div class="card folder-card">
+        <a href="{{ url_for('dashboard', folder=folder.id) }}">
+            <div class="icon">📁</div>
+            <div class="name">{{ folder.name }}</div>
+        </a>
+    </div>
+    {% else %}
+    <p class="empty">No folders here.</p>
+    {% endfor %}
+</div>
+
+<h2>Files</h2>
+<table class="file-table">
+    <thead>
+        <tr><th>Name</th><th>Size</th><th>Type</th><th>Uploaded</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        {% for file in files %}
+        <tr>
+            <td>📄 {{ file.original_name }}</td>
+            <td>{{ file.size_bytes | human_size }}</td>
+            <td>{{ file.mime_type }}</td>
+            <td>{{ file.uploaded_at[:19] }}</td>
+            <td class="actions">
+                <a href="{{ url_for('download', file_id=file.id) }}" class="btn-small">Download</a>
+                <form action="{{ url_for('create_share_link', file_id=file.id) }}" method="post" class="inline-form">
+                    <button type="submit" class="btn-small">Share</button>
+                </form>
+                <form action="{{ url_for('delete_file', file_id=file.id) }}" method="post" class="inline-form"
+                      onsubmit="return confirm('Delete this file?');">
+                    <button type="submit" class="btn-small btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="empty">No files in this folder yet. Upload something!</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

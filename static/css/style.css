@@ -1,0 +1,122 @@
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --bg: #f4f6fb;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --muted: #64748b;
+    --danger: #dc2626;
+    --success: #16a34a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--primary);
+    color: white;
+    padding: 12px 24px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.brand { color: white; text-decoration: none; font-size: 20px; font-weight: 700; }
+
+.nav-search input {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    width: 260px;
+}
+
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-right a, .nav-user { color: white; text-decoration: none; font-weight: 500; }
+.nav-right a:hover { text-decoration: underline; }
+
+.container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+
+.flash-container { margin-bottom: 16px; }
+.flash {
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+.flash-success { background: #dcfce7; color: #166534; }
+.flash-danger { background: #fee2e2; color: #991b1b; }
+.flash-warning { background: #fef9c3; color: #854d0e; }
+.flash-info { background: #dbeafe; color: #1e40af; }
+
+.auth-box {
+    max-width: 400px;
+    margin: 60px auto;
+    background: var(--card-bg);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.auth-box h1 { text-align: center; margin-bottom: 4px; }
+.subtitle { text-align: center; color: var(--muted); margin-bottom: 20px; }
+.auth-box label { display: block; margin: 10px 0 4px; font-size: 14px; font-weight: 600; }
+.auth-box input {
+    width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border);
+}
+.auth-switch { text-align: center; margin-top: 16px; font-size: 14px; }
+.hint { text-align: center; font-size: 12px; color: var(--muted); margin-top: 10px; }
+
+.btn-primary, .btn-secondary, .btn-small {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: 600;
+    font-size: 14px;
+}
+.btn-primary { background: var(--primary); color: white; width: 100%; margin-top: 16px; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-secondary { background: #e2e8f0; color: var(--text); }
+.btn-small { background: var(--primary); color: white; padding: 6px 10px; font-size: 12px; margin-right: 4px; text-decoration: none; display: inline-block; }
+.btn-danger { background: var(--danger); }
+
+.storage-meter { background: var(--card-bg); padding: 16px; border-radius: 10px; margin-bottom: 20px; }
+.meter-info { font-size: 14px; margin-bottom: 8px; }
+.meter-bar { background: #e2e8f0; border-radius: 10px; height: 10px; overflow: hidden; }
+.meter-fill { background: var(--primary); height: 100%; }
+
+.breadcrumb { margin-bottom: 16px; font-size: 14px; color: var(--muted); }
+.breadcrumb a { color: var(--primary); text-decoration: none; }
+
+.toolbar { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.upload-form, .folder-form {
+    display: flex; gap: 8px; align-items: center; background: var(--card-bg);
+    padding: 12px; border-radius: 10px; flex: 1; min-width: 280px;
+}
+.folder-form input { padding: 8px; border-radius: 6px; border: 1px solid var(--border); flex: 1; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.card { background: var(--card-bg); border-radius: 10px; padding: 16px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+.card a { text-decoration: none; color: var(--text); }
+.card .icon { font-size: 32px; }
+.card .name { font-size: 13px; margin-top: 6px; word-break: break-word; }
+
+.file-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 10px; overflow: hidden; margin-bottom: 24px; }
+.file-table th, .file-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+.file-table th { background: #f1f5f9; }
+.actions { white-space: nowrap; }
+.inline-form { display: inline; }
+
+.empty { text-align: center; color: var(--muted); padding: 20px; }
+.badge { background: var(--success); color: white; font-size: 10px; padding: 2px 6px; border-radius: 8px; }
+
+h1, h2 { color: var(--text); }
+h2 { font-size: 18px; margin-top: 28px; }

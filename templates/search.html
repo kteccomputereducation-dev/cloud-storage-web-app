@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Search Results{% endblock %}
+{% block content %}
+<h2>Search results for "{{ query }}"</h2>
+<table class="file-table">
+    <thead>
+        <tr><th>Name</th><th>Size</th><th>Type</th><th>Uploaded</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        {% for file in results %}
+        <tr>
+            <td>📄 {{ file.original_name }}</td>
+            <td>{{ file.size_bytes | human_size }}</td>
+            <td>{{ file.mime_type }}</td>
+            <td>{{ file.uploaded_at[:19] }}</td>
+            <td class="actions">
+                <a href="{{ url_for('download', file_id=file.id) }}" class="btn-small">Download</a>
+                <form action="{{ url_for('delete_file', file_id=file.id) }}" method="post" class="inline-form"
+                      onsubmit="return confirm('Delete this file?');">
+                    <button type="submit" class="btn-small btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="empty">No files matched your search.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

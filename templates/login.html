@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Login - Cloud File Storage{% endblock %}
+{% block content %}
+<div class="auth-box">
+    <h1>☁ Welcome Back</h1>
+    <p class="subtitle">Log in to access your cloud storage</p>
+    <form method="post">
+        <label>Username or Email</label>
+        <input type="text" name="username" required autofocus>
+        <label>Password</label>
+        <input type="password" name="password" required>
+        <button type="submit" class="btn-primary">Log In</button>
+    </form>
+    <p class="auth-switch">No account? <a href="{{ url_for('register') }}">Register here</a></p>
+    <p class="hint">Demo admin login: <code>admin / admin123</code></p>
+</div>
+{% endblock %}

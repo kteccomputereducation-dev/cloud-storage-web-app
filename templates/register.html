@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Register - Cloud File Storage{% endblock %}
+{% block content %}
+<div class="auth-box">
+    <h1>☁ Create Account</h1>
+    <p class="subtitle">Get 500 MB of free cloud storage</p>
+    <form method="post">
+        <label>Username</label>
+        <input type="text" name="username" required autofocus>
+        <label>Email</label>
+        <input type="email" name="email" required>
+        <label>Password</label>
+        <input type="password" name="password" minlength="6" required>
+        <button type="submit" class="btn-primary">Create Account</button>
+    </form>
+    <p class="auth-switch">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+</div>
+{% endblock %}
